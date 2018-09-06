@@ -4,6 +4,7 @@ const {ObjectID} = require('mongodb');
 
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
+const {User} = require('./../models/user');
 
 const todos = [{
     _id: new ObjectID(),
@@ -13,6 +14,14 @@ const todos = [{
     text: 'Second test todo',
     completed: true,
     completedAt: 333
+}];
+
+let users = [{
+    email: 'sjobs@apple.com',
+    password: 'Wozniak01'
+}, {
+    email: 'bgates@microsoft.com',
+    password: 'Balmer01'
 }];
 
 beforeEach((done) => {
@@ -178,4 +187,17 @@ describe('PATCH /todos/:id', () => {
             })
             .end(done);
     });
-})
+});
+
+
+describe('GET /users', () => {
+    it('should get all users', (done) => {
+        request(app)
+            .get('/users')
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.users.length).toBe(1);
+            })
+            .end(done);
+    });
+});
