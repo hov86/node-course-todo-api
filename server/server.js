@@ -104,8 +104,6 @@ app.post('/users', (req, res) => {
     });
 });
 
-
-
 app.get('/users/me', authenticate, (req, res) => {
     res.send(req.user);
 });
@@ -114,7 +112,5 @@ app.get('/users/me', authenticate, (req, res) => {
 app.listen(port, () => {
     console.log(`Started up at port ${port}`);
 });
-
-
 
 module.exports = {app};
